@@ -20,11 +20,11 @@ app.get('/:room',(req,res) => {
 io.on("connection",socket=> {
 
     socket.on("join-room",(roomId,userId) => {
-        socket.join(roomId);
+        socket.join(roomId);// room created
         console.log(roomId,userId);
-        socket.broadcast.emit("user-connected",userId);
+        socket.broadcast.emit("user-connected",userId); // send message room created
 
-        socket.on("disconneect",() => {
+        socket.on("disconnect",() => {
             socket.emit("user-disconnected",userId);
         })
     })
